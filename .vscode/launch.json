@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "inputs": [
+        {
+            "id": "appName",
+            "type": "promptString",
+            "description": "Application folder under my_firmware",
+            "default": "led_blink"
+        }
+    ],
+    "configurations": [
+        {
+            "name": "Zephyr: Debug app (Cortex-Debug/J-Link)",
+            "type": "cortex-debug",
+            "request": "launch",
+            "preLaunchTask": "Zephyr: Build app",
+            "servertype": "jlink",
+            "serverpath": "/usr/bin/JLinkGDBServerCLExe",
+            "gdbPath": "/opt/zephyr/sdk/gnu/arm-zephyr-eabi/bin/arm-zephyr-eabi-gdb",
+            "device": "MCXN947_M33_0",
+            "interface": "swd",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/zephyrproject/zephyr/build/apps/${input:appName}/zephyr/zephyr.elf",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none"
+        }
+    ]
+}

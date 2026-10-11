@@ -1,0 +1,89 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Zephyr: Build app",
+            "type": "process",
+            "command": "bash",
+            "args": [
+                "${workspaceFolder}/scripts/zephyr-app.sh",
+                "build",
+                "${input:appName}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Zephyr: Flash app (J-Link)",
+            "type": "process",
+            "command": "bash",
+            "args": [
+                "${workspaceFolder}/scripts/zephyr-app.sh",
+                "flash",
+                "${input:appName}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Zephyr: Debug app (J-Link)",
+            "type": "process",
+            "command": "bash",
+            "args": [
+                "${workspaceFolder}/scripts/zephyr-app.sh",
+                "debug",
+                "${input:appName}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Zephyr: Build and flash app (J-Link)",
+            "type": "process",
+            "command": "bash",
+            "args": [
+                "${workspaceFolder}/scripts/zephyr-app.sh",
+                "build-flash",
+                "${input:appName}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Zephyr: Serial Console",
+            "type": "process",
+            "command": "screen",
+            "args": [
+                "${input:serialPort}",
+                "115200"
+            ],
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "appName",
+            "type": "promptString",
+            "description": "Application folder under my_firmware",
+            "default": "led_blink"
+        },
+        {
+            "id": "serialPort",
+            "type": "promptString",
+            "description": "UART serial device",
+            "default": "/dev/ttyACM0"
+        }
+    ]
+}
